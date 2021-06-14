@@ -1,5 +1,6 @@
-from storage import StorageCall
 from unittest.case import TestCase
+
+from storage import StorageCall
 
 
 def get_sample_data():

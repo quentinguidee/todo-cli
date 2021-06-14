@@ -1,6 +1,5 @@
-from typing import Callable
-from commands.courses import *
 from commands.command import Command
+from commands.courses import *
 
 
 commands = {
@@ -22,7 +21,7 @@ commands = {
 def execute(*args: str):
     command = commands
     while True:
-        if type(command) is not dict:
+        if not isinstance(command, dict):
             break
 
         command = command.get(args[0])

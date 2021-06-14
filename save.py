@@ -1,7 +1,6 @@
-from storage import storage
-
-from models.task import Task, TaskStatus
 from models.course import Course
+from models.task import Task, TaskStatus
+from storage import storage
 
 
 def get_courses():

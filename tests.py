@@ -1,6 +1,5 @@
 import sys
 import unittest
-
 from unittest.loader import TestLoader
 
 from tests.test_courses import TestCourses
