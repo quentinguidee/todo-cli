@@ -8,7 +8,7 @@ commands = {
         "add": AddCourseCommand(),
         "remove": RemoveCourseCommand(),
         "list": ListCoursesCommand(),
-        "add-labo": AddTaskToCourseCommand("labo", "Labo"),
+        "add-lab": AddTaskToCourseCommand("lab", "Lab"),
         "add-chapter": AddTaskToCourseCommand("chapter", "Chapter"),
         "add-session": AddTaskToCourseCommand("session", "Session"),
         "add-course": AddTaskToCourseCommand("course", "Course"),
