@@ -1,0 +1,10 @@
+﻿{
+    "courses": {
+        "course1": {
+            "name": "Course 1"
+        },
+        "course2": {
+            "name": "Course 2"
+        }
+    }
+}
