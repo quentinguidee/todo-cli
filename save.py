@@ -77,6 +77,28 @@ def add_tasks(course_id: str, tasks: list[Task]):
     return 0
 
 
+def remove_tasks(course_id: str, task: str):
+    data = load()
+    courses: dict = data.get("courses")
+    if courses == None:
+        return 1
+
+    course: dict = courses.get(course_id)
+    if (course == None):
+        return 1
+
+    tasks_save: dict = course.get("tasks")
+    if tasks_save == None:
+        course["tasks"] = {}
+        tasks_save = course["tasks"]
+
+    tasks_save.pop(task)
+
+    save(data)
+
+    return 0
+
+
 def get_tasks(course_id: str):
     data = load()
     courses: dict = data.get("courses")

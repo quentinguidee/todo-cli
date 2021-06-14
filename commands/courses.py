@@ -81,6 +81,20 @@ class AddTaskToCourseCommand(Command):
             console.print(tag, Text(task.name))
 
 
+class RemoveTaskCourseCommand(Command):
+    args = {
+        "name": "The linked course.",
+        "task": "The task to remove."
+    }
+
+    def execute(self, args) -> None:
+        save.remove_tasks(*args)
+
+        console = Console()
+        tag = Text(" TASK REMOVED ", style="bold black on green", end=" ")
+        console.print(tag, Text(args[1]))
+
+
 class ListTasksCourseCommand(Command):
     args = {"name": "The course name"}
 

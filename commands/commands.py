@@ -12,6 +12,7 @@ commands = {
         "add-chapter": AddTaskToCourseCommand("chapter", "Chapter"),
         "add-session": AddTaskToCourseCommand("session", "Session"),
         "add-course": AddTaskToCourseCommand("course", "Course"),
+        "remove-task": RemoveTaskCourseCommand(),
         "list-tasks": ListTasksCourseCommand(),
         "set-status": SetStatusTaskCourseCommand(),
     }
