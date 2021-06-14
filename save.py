@@ -18,7 +18,7 @@ def save(data):
 
 def get_courses():
     courses = load().get("courses")
-    if courses == None:
+    if courses is None:
         return
 
     return [Course(k, v.get("name")) for k, v in courses.items()]
@@ -28,7 +28,7 @@ def add_course(course: Course):
     data = load()
     courses = data.get("courses")
 
-    if courses == None:
+    if courses is None:
         data["courses"] = {}
         courses = data["courses"]
 
@@ -42,7 +42,7 @@ def remove_course(id: str):
     data = load()
     courses: dict = data.get("courses")
 
-    if courses == None:
+    if courses is None:
         return 1
 
     courses.pop(id)
@@ -54,15 +54,15 @@ def remove_course(id: str):
 def add_tasks(course_id: str, tasks: list[Task]):
     data = load()
     courses: dict = data.get("courses")
-    if courses == None:
+    if courses is None:
         return 1
 
     course: dict = courses.get(course_id)
-    if (course == None):
+    if (course is None):
         return 1
 
     tasks_save: dict = course.get("tasks")
-    if tasks_save == None:
+    if tasks_save is None:
         course["tasks"] = {}
         tasks_save = course["tasks"]
 
@@ -80,15 +80,15 @@ def add_tasks(course_id: str, tasks: list[Task]):
 def remove_tasks(course_id: str, task: str):
     data = load()
     courses: dict = data.get("courses")
-    if courses == None:
+    if courses is None:
         return 1
 
     course: dict = courses.get(course_id)
-    if (course == None):
+    if (course is None):
         return 1
 
     tasks_save: dict = course.get("tasks")
-    if tasks_save == None:
+    if tasks_save is None:
         course["tasks"] = {}
         tasks_save = course["tasks"]
 
@@ -102,15 +102,15 @@ def remove_tasks(course_id: str, task: str):
 def get_tasks(course_id: str):
     data = load()
     courses: dict = data.get("courses")
-    if courses == None:
+    if courses is None:
         return 1
 
     course: dict = courses.get(course_id)
-    if (course == None):
+    if (course is None):
         return 1
 
     tasks_save: dict = course.get("tasks")
-    if tasks_save == None:
+    if tasks_save is None:
         return []
 
     return [Task(k, v.get("name"), TaskStatus(v.get("status"))) for k, v in tasks_save.items()]
@@ -119,19 +119,19 @@ def get_tasks(course_id: str):
 def set_task_status(course_id: str, task_id: str, status: TaskStatus):
     data = load()
     courses: dict = data.get("courses")
-    if courses == None:
+    if courses is None:
         return 1
 
     course: dict = courses.get(course_id)
-    if (course == None):
+    if (course is None):
         return 1
 
     tasks: dict = course.get("tasks")
-    if tasks == None:
+    if tasks is None:
         return 1
 
     task = tasks.get(task_id)
-    if task == None:
+    if task is None:
         return 0
 
     task["status"] = status.value

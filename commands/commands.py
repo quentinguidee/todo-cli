@@ -28,7 +28,7 @@ def execute(*args: str):
         command = command.get(args[0])
         args = args[1:]
 
-        if command == None:
+        if command is None:
             print("Command not found.")
             return
 
