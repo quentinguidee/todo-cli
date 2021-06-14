@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 import json
-from re import A
 from models.task import Task, TaskStatus
 from models.course import Course
 
@@ -78,7 +77,7 @@ def add_tasks(course_id: str, tasks: list[Task]):
     return 0
 
 
-def get_tasks(course_id):
+def get_tasks(course_id: str):
     data = load()
     courses: dict = data.get("courses")
     if courses == None:
@@ -93,3 +92,26 @@ def get_tasks(course_id):
         return []
 
     return [Task(k, v.get("name"), TaskStatus(v.get("status"))) for k, v in tasks_save.items()]
+
+
+def set_task_status(course_id: str, task_id: str, status: TaskStatus):
+    data = load()
+    courses: dict = data.get("courses")
+    if courses == None:
+        return 1
+
+    course: dict = courses.get(course_id)
+    if (course == None):
+        return 1
+
+    tasks: dict = course.get("tasks")
+    if tasks == None:
+        return 1
+
+    task = tasks.get(task_id)
+    if task == None:
+        return 0
+
+    task["status"] = status.value
+
+    save(data)

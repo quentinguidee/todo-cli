@@ -13,6 +13,7 @@ commands = {
         "add-session": AddTaskToCourseCommand("session", "Session"),
         "add-course": AddTaskToCourseCommand("course", "Course"),
         "list-tasks": ListTasksCourseCommand(),
+        "set-status": SetStatusTaskCourseCommand(),
     }
 }
 

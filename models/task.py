@@ -8,20 +8,26 @@ class TaskStatus(Enum):
     DONE = 2
 
     def get_glyph(self):
-        if self == self.NOT_DONE:
-            return "✗"
-        if self == self.ALMOST_DONE:
-            return "~"
-        if self == self.DONE:
-            return "✓"
+        return {
+            self.NOT_DONE: "✗",
+            self.ALMOST_DONE: "~",
+            self.DONE: "✓",
+        }.get(self)
 
     def get_color(self):
-        if self == self.NOT_DONE:
-            return "red"
-        if self == self.ALMOST_DONE:
-            return "orange"
-        if self == self.DONE:
-            return "green"
+        return {
+            self.NOT_DONE: "red",
+            self.ALMOST_DONE: "yellow",
+            self.DONE: "green"
+        }.get(self)
+
+    @classmethod
+    def from_string(cls, string: str):
+        return {
+            "not-done": cls.NOT_DONE,
+            "almost-done": cls.ALMOST_DONE,
+            "done": cls.DONE,
+        }.get(string)
 
 
 @dataclass

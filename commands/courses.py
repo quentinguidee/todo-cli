@@ -12,7 +12,7 @@ from typing import Any
 
 from commands.command import Command
 
-from models.task import Task
+from models.task import Task, TaskStatus
 
 
 class AddCourseCommand(Command):
@@ -99,3 +99,18 @@ class ListTasksCourseCommand(Command):
             table.add_row(status, task.name)
 
         console.print(table)
+
+
+class SetStatusTaskCourseCommand(Command):
+    args = {
+        "name": "The course name.",
+        "task": "The task name.",
+        "status": "The status (not-done/almost-done/done)"
+    }
+
+    def execute(self, args) -> None:
+        save.set_task_status(
+            course_id=args[0],
+            task_id=args[1],
+            status=TaskStatus.from_string(args[2])
+        )
