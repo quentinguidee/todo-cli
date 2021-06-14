@@ -88,7 +88,7 @@ class RemoveTaskCourseCommand(Command):
     }
 
     def execute(self, args) -> None:
-        save.remove_tasks(*args)
+        save.remove_task(*args)
 
         console = Console()
         tag = Text(" TASK REMOVED ", style="bold black on green", end=" ")
