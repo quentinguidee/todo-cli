@@ -5,9 +5,13 @@ from commands.command import Command
 
 commands = {
     "course": {
-        "add": AddCourseCommand,
-        "remove": RemoveCourseCommand,
-        "list": ListCoursesCommand
+        "add": AddCourseCommand(),
+        "remove": RemoveCourseCommand(),
+        "list": ListCoursesCommand(),
+        "add-labo": AddTaskToCourseCommand("labo", "Labo"),
+        "add-chapter": AddTaskToCourseCommand("chapter", "Chapter"),
+        "add-session": AddTaskToCourseCommand("session", "Session"),
+        "add-course": AddTaskToCourseCommand("course", "Course")
     }
 }
 
@@ -25,6 +29,6 @@ def execute(*args: str):
             print("Command not found.")
             return
 
-    if issubclass(command, Command):
-        command()(args)
+    if issubclass(type(command), Command):
+        command(args)
         return

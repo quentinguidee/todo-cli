@@ -1,7 +1,11 @@
 ﻿{
     "courses": {
         "course1": {
-            "name": "Course 1"
+            "name": "Course 1",
+            "tasks": {
+                "session1": "Session 1",
+                "session2": "Session 2"
+            }
         },
         "course2": {
             "name": "Course 2"

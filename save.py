@@ -1,4 +1,6 @@
+from dataclasses import dataclass
 import json
+from models.task import Task
 from models.course import Course
 
 
@@ -28,6 +30,7 @@ def add_course(course: Course):
 
     if courses == None:
         data["courses"] = {}
+        courses = data["courses"]
 
     courses[course.id] = {"name": course.name}
     save(data)
@@ -43,6 +46,29 @@ def remove_course(id: str):
         return 1
 
     courses.pop(id)
+    save(data)
+
+    return 0
+
+
+def add_tasks(course_id: str, tasks: list[Task]):
+    data = load()
+    courses: dict = data.get("courses")
+    if courses == None:
+        return 1
+
+    course: dict = courses.get(course_id)
+    if (course == None):
+        return 1
+
+    tasks_save: dict = course.get("tasks")
+    if tasks_save == None:
+        course["tasks"] = {}
+        tasks_save = course["tasks"]
+
+    for task in tasks:
+        tasks_save[task.id] = {"name": task.name}
+
     save(data)
 
     return 0
