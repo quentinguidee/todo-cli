@@ -1,9 +1,14 @@
+from unittest.loader import TestLoader
+
 from tests.test_courses import TestCourses
+from tests.test_storage import TestStorage
+
 import unittest
 
 
 def tests_suite():
     suite = unittest.TestSuite([
+        unittest.TestLoader().loadTestsFromTestCase(TestStorage),
         unittest.TestLoader().loadTestsFromTestCase(TestCourses)
     ])
     return suite

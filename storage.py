@@ -3,9 +3,9 @@ import json
 
 
 class StorageCall:
-    def __init__(self, data: dict, data_selection: dict) -> None:
+    def __init__(self, data: dict, data_selection: dict = None) -> None:
         self.data: dict = data
-        self.data_selection: dict = data_selection
+        self.data_selection: dict = data if data_selection is None else data_selection
 
     def get(self, path: str) -> 'StorageCall':
         if path not in self.data_selection:
@@ -19,15 +19,15 @@ class StorageCall:
             save_data(self.data)
 
     def add_all(self, values: list[dict]):
-        print(values)
         for value in values:
             self.add(value[0], value[1], save=False)
 
         save_data(self.data)
 
     def remove(self, key: str):
-        self.data_selection.pop(key)
-        save_data(self.data)
+        if key in self.data_selection:
+            self.data_selection.pop(key)
+            save_data(self.data)
 
     def edit(self, key: str, new_value: str):
         self.data_selection[key] = new_value
