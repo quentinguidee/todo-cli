@@ -3,8 +3,14 @@
         "course1": {
             "name": "Course 1",
             "tasks": {
-                "session1": "Session 1",
-                "session2": "Session 2"
+                "session1": {
+                    "name": "Session 1",
+                    "status": 0
+                },
+                "session2": {
+                    "name": "Session 2",
+                    "status": 2
+                }
             }
         },
         "course2": {

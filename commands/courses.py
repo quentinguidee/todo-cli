@@ -2,7 +2,7 @@ import save
 
 from rich import console
 from rich import text
-
+from rich.table import Table
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.text import Text
@@ -79,3 +79,23 @@ class AddTaskToCourseCommand(Command):
         for task in tasks:
             tag = Text(" TASK ADDED ", style="bold black on green", end=" ")
             console.print(tag, Text(task.name))
+
+
+class ListTasksCourseCommand(Command):
+    args = {"name": "The course name"}
+
+    def execute(self, args) -> None:
+        tasks: list[Task] = save.get_tasks(args[0])
+
+        console = Console()
+
+        table = Table(title="Tasks")
+
+        table.add_column("")
+        table.add_column("Task")
+
+        for task in tasks:
+            status = Text(task.status.get_glyph(), style=task.status.get_color())
+            table.add_row(status, task.name)
+
+        console.print(table)

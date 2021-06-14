@@ -11,7 +11,8 @@ commands = {
         "add-labo": AddTaskToCourseCommand("labo", "Labo"),
         "add-chapter": AddTaskToCourseCommand("chapter", "Chapter"),
         "add-session": AddTaskToCourseCommand("session", "Session"),
-        "add-course": AddTaskToCourseCommand("course", "Course")
+        "add-course": AddTaskToCourseCommand("course", "Course"),
+        "list-tasks": ListTasksCourseCommand(),
     }
 }
 
