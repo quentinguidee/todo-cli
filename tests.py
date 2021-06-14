@@ -1,9 +1,10 @@
+import sys
+import unittest
+
 from unittest.loader import TestLoader
 
 from tests.test_courses import TestCourses
 from tests.test_storage import TestStorage
-
-import unittest
 
 
 def tests_suite():
@@ -16,4 +17,5 @@ def tests_suite():
 
 if __name__ == '__main__':
     runner = unittest.TextTestRunner()
-    runner.run(tests_suite())
+    success = runner.run(tests_suite()).wasSuccessful()
+    sys.exit(1 if not success else 0)
