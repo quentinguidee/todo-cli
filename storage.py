@@ -41,7 +41,6 @@ def get_data():
     with open("save.json", "r", encoding="utf-8-sig") as f:
         data = json.load(f)
 
-
     return data
 
 
