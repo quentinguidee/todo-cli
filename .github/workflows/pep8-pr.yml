@@ -13,7 +13,7 @@ jobs:
       uses: quentinguidee/pep8-action@v1
       id: run_pep8
       with:
-        arguments: '--max-line-length=79'
+        arguments: '--max-line-length=120'
       continue-on-error: true
     - name: 'Comment'
       uses: actions/github-script@v3
