@@ -1,18 +1,14 @@
 import save
+from models.course import Course
+from models.task import Task, TaskStatus
 
-from rich import console
-from rich import text
-from rich.table import Table
+from rich import console, text
 from rich.console import Console
 from rich.markdown import Markdown
+from rich.table import Table
 from rich.text import Text
 
-from models.course import Course
-from typing import Any
-
 from commands.command import Command
-
-from models.task import Task, TaskStatus
 
 
 class AddCourseCommand(Command):

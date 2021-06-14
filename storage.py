@@ -20,7 +20,7 @@ class StorageCall:
 
     def add_all(self, values: list[dict]):
         for value in values:
-            self.add(value[0], value[1], save=False)
+            self.add(*value[:2], save=False)
 
         save_data(self.data)
 
@@ -40,6 +40,7 @@ class StorageCall:
 def get_data():
     with open("save.json", "r", encoding="utf-8-sig") as f:
         data = json.load(f)
+
 
     return data
 
