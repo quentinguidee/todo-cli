@@ -1,6 +1,6 @@
 import sys
 
-from commands import execute
+from commands.commands import execute
 
 
 if __name__ == "__main__":
