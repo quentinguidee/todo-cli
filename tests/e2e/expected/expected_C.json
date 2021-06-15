@@ -1,0 +1,53 @@
+{
+    "courses": {
+        "physics": {
+            "name": "Physics",
+            "tasks": {
+                "lab1": {
+                    "name": "Lab 1",
+                    "status": 2
+                },
+                "lab3": {
+                    "name": "Lab 3",
+                    "status": 0
+                },
+                "chapter1": {
+                    "name": "Chapter 1",
+                    "status": 0
+                },
+                "chapter2": {
+                    "name": "Chapter 2",
+                    "status": 0
+                },
+                "chapter3": {
+                    "name": "Chapter 3",
+                    "status": 0
+                },
+                "course2": {
+                    "name": "Course 2",
+                    "status": 0
+                }
+            }
+        },
+        "mathematics": {
+            "name": "Mathematics"
+        },
+        "english": {
+            "name": "English",
+            "tasks": {
+                "session1": {
+                    "name": "Session 1",
+                    "status": 1
+                },
+                "session2": {
+                    "name": "Session 2",
+                    "status": 0
+                },
+                "session3": {
+                    "name": "Session 3",
+                    "status": 0
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import json
+import os
 
-from dataclasses import dataclass
+SAVE_FILENAME = "save.json"
 
 
 class StorageCall:
@@ -40,10 +41,13 @@ class StorageCall:
 
     def save(self):
         if self.allow_save:
-            save_data("save.json", self.data)
+            save_data(SAVE_FILENAME, self.data)
 
 
 def get_data(filename: str):
+    if not os.path.exists(filename):
+        save_data(filename, {})
+
     with open(filename, "r", encoding="utf-8-sig") as f:
         data = json.load(f)
 
@@ -56,5 +60,5 @@ def save_data(filename: str, data: dict):
 
 
 def storage():
-    data = get_data("save.json")
+    data = get_data(SAVE_FILENAME)
     return StorageCall(data)

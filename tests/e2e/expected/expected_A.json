@@ -1,0 +1,13 @@
+{
+    "courses": {
+        "physics": {
+            "name": "Physics"
+        },
+        "mathematics": {
+            "name": "Mathematics"
+        },
+        "english": {
+            "name": "English"
+        }
+    }
+}
