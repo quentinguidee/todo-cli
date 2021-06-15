@@ -10,8 +10,8 @@ class Time:
     def now(cls):
         return cls(time.time())
 
-    def get_hour_and_minutes(self) -> str:
-        now = datetime.datetime.fromtimestamp(self.timestamp)
+    def get_hour_and_minutes(self, timezone=None) -> str:
+        now = datetime.datetime.fromtimestamp(self.timestamp, tz=timezone)
         return "{hour:02d}:{min:02d}".format(hour=now.hour, min=now.minute)
 
     def get_date(self) -> str:

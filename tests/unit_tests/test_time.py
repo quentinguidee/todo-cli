@@ -1,5 +1,6 @@
-from unittest import TestCase
+import pytz
 
+from unittest import TestCase
 
 from utils.time import DeltaTime, Time
 
@@ -8,7 +9,7 @@ class TestTime(TestCase):
     def test_time(self):
         time = Time(1623766147.58488)
         self.assertEqual(time.get_date(), "2021-06-15")
-        self.assertEqual(time.get_hour_and_minutes(), "16:09")
+        self.assertEqual(time.get_hour_and_minutes(pytz.UTC), "14:09")
         self.assertEqual(time.timestamp, 1623766147.58488)
 
     def test_time_now(self):
