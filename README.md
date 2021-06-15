@@ -20,7 +20,7 @@ A tool to manage the study of courses at the university.
 - [ ] Today
 - [ ] Documentation
 - [ ] Autocomplete
-- [ ] Unit Tests
+- [x] Unit tests and E2E tests
 - [ ] Errors handling
 
 ## Contributing
