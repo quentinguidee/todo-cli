@@ -1,5 +1,6 @@
 from commands.command import Command
 from commands.courses import *
+from commands.timer import *
 
 
 commands = {
@@ -14,6 +15,10 @@ commands = {
         "remove-task": RemoveTaskCourseCommand(),
         "list-tasks": ListTasksCourseCommand(),
         "set-status": SetStatusTaskCourseCommand(),
+    },
+    "timer": {
+        "start": StartTimerCommand(),
+        "stop": StopTimerCommand(),
     }
 }
 

@@ -1,3 +1,4 @@
+from datetime import date
 import json
 import os
 import sys
@@ -60,6 +61,34 @@ class TestE2E(TestCase):
 
         data, expect = get_current_save(), get_expected_save("C")
         self.assertDictEqual(data, expect)
+
+        execute('todo timer start')
+        execute('todo timer stop')
+
+        data = get_current_save()
+        self.assertIn("timer", data)
+
+        timer = data.get("timer")
+        self.assertIn("events", timer)
+
+        events = timer.get("events")
+        today = date.today().isoformat()
+        self.assertIn(today, events)
+
+        today = events.get(today)
+        self.assertIn("1", today)
+
+        event = today.get("1")
+        start, end = event.get("start"), event.get("end")
+        self.assertIsInstance(start, float)
+        self.assertIsInstance(end, float)
+
+        execute('todo timer start')
+        execute('todo timer stop')
+
+        data = get_current_save()
+
+        self.assertIn("2", data.get("timer").get("events").get(date.today().isoformat()))
 
     def tearDown(self):
         os.remove(TEMP_FILE_NAME)

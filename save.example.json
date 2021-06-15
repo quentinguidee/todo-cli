@@ -16,5 +16,6 @@
         "course2": {
             "name": "Course 2"
         }
-    }
+    },
+    "timer": {}
 }

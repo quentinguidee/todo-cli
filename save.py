@@ -35,3 +35,23 @@ def get_tasks(course_id: str):
 
 def set_task_status(course_id: str, task_id: str, status: TaskStatus):
     return storage().get("courses").get(course_id).get("tasks").get(task_id).edit("status", status.value)
+
+
+def start_timer(time: float):
+    return storage().get("timer").edit("start", time)
+
+
+def end_timer():
+    return storage().get("timer").remove("start")
+
+
+def get_current_timer():
+    return storage().get("timer").get("start").as_dict()
+
+
+def add_current_study(date: str, start_timer: float, end_timer: float):
+    events = storage().get("timer").get("events").get(date).as_dict()
+    return storage().get("timer").get("events").get(date).add(len(events) + 1, {
+        "start": start_timer,
+        "end": end_timer,
+    })
