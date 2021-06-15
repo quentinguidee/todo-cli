@@ -1,5 +1,7 @@
+from utils.time import Time
 from models.course import Course
 from models.task import Task, TaskStatus
+from models.event import Event
 from storage import storage
 
 
@@ -49,9 +51,15 @@ def get_current_timer():
     return storage().get("timer").get("start").as_dict()
 
 
-def add_current_study(date: str, start_timer: float, end_timer: float):
+def add_current_study(date: str, start_timer: Time, end_timer: Time):
     events = storage().get("timer").get("events").get(date).as_dict()
     return storage().get("timer").get("events").get(date).add(len(events) + 1, {
-        "start": start_timer,
-        "end": end_timer,
+        "start": start_timer.timestamp,
+        "end": end_timer.timestamp,
     })
+
+
+def get_events(date: Time):
+    date = date.get_date()
+    events = storage().get("timer").get("events").get(date).as_dict()
+    return [Event(k, Time(v.get("start")), Time(v.get("end"))) for k, v in events.items()]

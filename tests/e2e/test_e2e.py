@@ -90,5 +90,7 @@ class TestE2E(TestCase):
 
         self.assertIn("2", data.get("timer").get("events").get(date.today().isoformat()))
 
+        execute('todo today')
+
     def tearDown(self):
         os.remove(TEMP_FILE_NAME)

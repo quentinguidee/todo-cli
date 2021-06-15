@@ -1,7 +1,7 @@
 from commands.command import Command
 from commands.courses import *
 from commands.timer import *
-
+from commands.today import *
 
 commands = {
     "course": {
@@ -19,7 +19,8 @@ commands = {
     "timer": {
         "start": StartTimerCommand(),
         "stop": StopTimerCommand(),
-    }
+    },
+    "today": TodayCommand()
 }
 
 
