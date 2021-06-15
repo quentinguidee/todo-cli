@@ -16,8 +16,8 @@ A tool to manage the study of courses at the university.
 
 ![image](https://user-images.githubusercontent.com/12123721/121872097-2b4e1480-cd05-11eb-87e8-a8fabb23995b.png)
 
-- [ ] Timers
-- [ ] Today
+- [x] Timers
+- [x] Today
 - [ ] Documentation
 - [ ] Autocomplete
 - [x] Unit tests and E2E tests
