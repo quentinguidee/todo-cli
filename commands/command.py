@@ -1,5 +1,4 @@
 import abc
-from typing import Callable
 
 
 class Command(metaclass=abc.ABCMeta):

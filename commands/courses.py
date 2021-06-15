@@ -1,13 +1,12 @@
 import save
-from models.course import Course
-from models.task import Task, TaskStatus
 
-from rich import console, text
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.table import Table
 from rich.text import Text
 
+from models.course import Course
+from models.task import Task, TaskStatus
 from commands.command import Command
 
 
