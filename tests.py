@@ -3,14 +3,12 @@ import unittest
 
 from tests.e2e.test_e2e import TestE2E
 
-from tests.unit_tests.test_courses import TestCourses
 from tests.unit_tests.test_storage import TestStorage
 
 
 def tests_suite():
     suite = unittest.TestSuite([
         unittest.TestLoader().loadTestsFromTestCase(TestStorage),
-        unittest.TestLoader().loadTestsFromTestCase(TestCourses),
         unittest.TestLoader().loadTestsFromTestCase(TestE2E),
     ])
     return suite
