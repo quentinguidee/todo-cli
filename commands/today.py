@@ -18,6 +18,7 @@ class TodayCommand(Command):
 
         table = Table(title="Events")
 
+        table.add_column()
         table.add_column("Duration")
         table.add_column("Start")
         table.add_column("End")
@@ -28,6 +29,7 @@ class TodayCommand(Command):
             delta_time = DeltaTime.between(event.start, event.end)
             total += delta_time
             table.add_row(
+                event.id,
                 delta_time.get_hour_minutes_seconds(),
                 event.start.get_hour_and_minutes(),
                 event.end.get_hour_and_minutes()
