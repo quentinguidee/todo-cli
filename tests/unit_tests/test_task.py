@@ -13,7 +13,7 @@ class TestTaskStatus(TestCase):
         }
 
         for k, v in glyphs.items():
-            self.assertEqual(k.get_glyph(), v)
+            self.assertEqual(k.glyph, v)
 
     def test_task_color(self):
         colors = {
@@ -23,7 +23,7 @@ class TestTaskStatus(TestCase):
         }
 
         for k, v in colors.items():
-            self.assertEqual(k.get_color(), v)
+            self.assertEqual(k.color, v)
 
     def test_from_string(self):
         strings = {

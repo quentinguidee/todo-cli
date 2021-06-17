@@ -7,14 +7,16 @@ class TaskStatus(Enum):
     ALMOST_DONE = 1
     DONE = 2
 
-    def get_glyph(self):
+    @property
+    def glyph(self):
         return {
             self.NOT_DONE: "✗",
             self.ALMOST_DONE: "~",
             self.DONE: "✓",
         }.get(self)
 
-    def get_color(self):
+    @property
+    def color(self):
         return {
             self.NOT_DONE: "red",
             self.ALMOST_DONE: "yellow",
