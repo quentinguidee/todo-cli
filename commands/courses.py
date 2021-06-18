@@ -104,7 +104,7 @@ class ListTasksCourseCommand(Command):
         table.add_column("Task")
 
         for task in tasks:
-            status = Text(task.status.get_glyph(), style=task.status.get_color())
+            status = Text(task.status.glyph, style=task.status.color)
             table.add_row(status, task.name)
 
         console.print(table)
