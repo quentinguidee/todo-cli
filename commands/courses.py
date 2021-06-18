@@ -1,19 +1,20 @@
-import save
+from typing import NoReturn
 
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.table import Table
 from rich.text import Text
 
+from commands.command import Command
 from models.course import Course
 from models.task import Task, TaskStatus
-from commands.command import Command
+import save
 
 
 class AddCourseCommand(Command):
     args = {"name": "The course to add."}
 
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         id = "-".join(args[0].lower().split())
         save.add_course(Course(id, args[0]))
 
@@ -25,7 +26,7 @@ class AddCourseCommand(Command):
 class RemoveCourseCommand(Command):
     args = {"name": "The course to remove."}
 
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         save.remove_course(args[0])
 
         console = Console()
@@ -34,7 +35,7 @@ class RemoveCourseCommand(Command):
 
 
 class ListCoursesCommand(Command):
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         courses = save.get_courses()
 
         console = Console()
@@ -45,7 +46,7 @@ class ListCoursesCommand(Command):
 
 
 class AddTaskToCourseCommand(Command):
-    def __init__(self, task_id: str, task_name: str) -> None:
+    def __init__(self, task_id: str, task_name: str):
         self.task_id = task_id
         self.task_name = task_name
 
@@ -54,7 +55,7 @@ class AddTaskToCourseCommand(Command):
         "numbers": "The tasks ids."
     }
 
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         course_id = args[0]
 
         def get_ids():
@@ -85,7 +86,7 @@ class RemoveTaskCourseCommand(Command):
         "task": "The task to remove."
     }
 
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         save.remove_task(*args)
 
         console = Console()
@@ -94,7 +95,7 @@ class RemoveTaskCourseCommand(Command):
 
 
 class ListAllTasksCommand(Command):
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         tasks: list[Task] = save.get_all_tasks()
         print_tasks(tasks)
 
@@ -102,7 +103,7 @@ class ListAllTasksCommand(Command):
 class ListTasksCourseCommand(Command):
     args = {"name": "The course name"}
 
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         tasks: list[Task] = save.get_tasks(args[0])
         print_tasks(tasks)
 
@@ -150,7 +151,7 @@ class SetStatusTaskCourseCommand(Command):
         "status": "The status (not-done/almost-done/done)"
     }
 
-    def execute(self, args) -> None:
+    def execute(self, args) -> NoReturn:
         save.set_task_status(
             course_id=args[0],
             task_id=args[1],

@@ -7,7 +7,7 @@ class Time:
         self.timestamp = timestamp
 
     @classmethod
-    def now(cls):
+    def now(cls) -> 'Time':
         return cls(time.time())
 
     def get_hour_and_minutes(self, timezone=None) -> str:
@@ -29,10 +29,10 @@ class DeltaTime:
         return str(time.strftime('%H:%M:%S', time.gmtime(self.timestamp)))
 
     @classmethod
-    def between(cls, a: Time, b: Time):
+    def between(cls, a: Time, b: Time) -> 'DeltaTime':
         return cls(abs(b.timestamp - a.timestamp))
 
-    def __add__(self, other: 'DeltaTime'):
+    def __add__(self, other: 'DeltaTime') -> 'DeltaTime':
         self.timestamp += other.timestamp
         return self
 
