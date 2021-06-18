@@ -38,7 +38,8 @@ class TestTaskStatus(TestCase):
 
 class TestTask(TestCase):
     def test_task(self):
-        task = Task("id", "Name", TaskStatus.DONE)
+        task = Task("id", "Name", "course_id", TaskStatus.DONE)
         self.assertEqual(task.id, "id")
         self.assertEqual(task.name, "Name")
+        self.assertEqual(task.course_id, "course_id")
         self.assertEqual(task.status, TaskStatus.DONE)

@@ -57,7 +57,9 @@ class TestE2E(TestCase):
         execute('todo course set-status english session1 almost-done')
         execute('todo course set-status english session3 done')
         execute('todo course set-status english session3 not-done')
-        execute('todo course list-tasks')
+
+        execute('todo course list-tasks english')
+        execute('todo course list-all-tasks')
 
         data, expect = get_current_save(), get_expected_save("C")
         self.assertDictEqual(data, expect)

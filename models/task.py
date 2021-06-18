@@ -36,4 +36,5 @@ class TaskStatus(Enum):
 class Task:
     id: str
     name: str
+    course_id: str
     status: TaskStatus = TaskStatus.NOT_DONE

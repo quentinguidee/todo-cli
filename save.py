@@ -37,7 +37,12 @@ def remove_task(course_id: str, task: str):
 
 def get_tasks(course_id: str):
     tasks = storage().get("courses").get(course_id).get("tasks").as_dict()
-    return [Task(k, v.get("name"), TaskStatus(v.get("status"))) for k, v in tasks.items()]
+    return [Task(k, v.get("name"), course_id, TaskStatus(v.get("status"))) for k, v in tasks.items()]
+
+
+def get_all_tasks():
+    courses = get_courses()
+    return [task for course in courses for task in get_tasks(course.id)]
 
 
 def set_task_status(course_id: str, task_id: str, status: TaskStatus):

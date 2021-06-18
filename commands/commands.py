@@ -14,6 +14,7 @@ commands = {
         "add-course": AddTaskToCourseCommand("course", "Course"),
         "remove-task": RemoveTaskCourseCommand(),
         "list-tasks": ListTasksCourseCommand(),
+        "list-all-tasks": ListAllTasksCommand(),
         "set-status": SetStatusTaskCourseCommand(),
     },
     "timer": {

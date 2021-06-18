@@ -55,6 +55,8 @@ class AddTaskToCourseCommand(Command):
     }
 
     def execute(self, args) -> None:
+        course_id = args[0]
+
         def get_ids():
             ids: str = args[1]
             if ids.isdigit():
@@ -65,10 +67,11 @@ class AddTaskToCourseCommand(Command):
 
         tasks = [Task(
             "{name}{id}".format(name=self.task_id, id=id),
-            "{name} {id}".format(name=self.task_name, id=id)
+            "{name} {id}".format(name=self.task_name, id=id),
+            course_id
         ) for id in get_ids()]
 
-        save.add_tasks(args[0], tasks)
+        save.add_tasks(course_id, tasks)
 
         console = Console()
         for task in tasks:
@@ -90,24 +93,54 @@ class RemoveTaskCourseCommand(Command):
         console.print(tag, Text(args[1]))
 
 
+class ListAllTasksCommand(Command):
+    def execute(self, args) -> None:
+        tasks: list[Task] = save.get_all_tasks()
+        print_tasks(tasks)
+
+
 class ListTasksCourseCommand(Command):
     args = {"name": "The course name"}
 
     def execute(self, args) -> None:
         tasks: list[Task] = save.get_tasks(args[0])
+        print_tasks(tasks)
 
-        console = Console()
 
-        table = Table(title="Tasks")
+def print_tasks(tasks: list[Task]):
+    console = Console()
 
-        table.add_column("")
-        table.add_column("Task")
+    table = Table(title="Tasks")
 
-        for task in tasks:
-            status = Text(task.status.glyph, style=task.status.color)
-            table.add_row(status, task.name)
+    table.add_column("")
+    table.add_column("Course")
+    table.add_column("Task")
 
-        console.print(table)
+    not_done, almost_done, done = 0, 0, 0
+
+    for task in tasks:
+        status = Text(task.status.glyph, style=task.status.color)
+        table.add_row(status, task.course_id, task.name)
+
+        if task.status == TaskStatus.NOT_DONE:
+            not_done += 1
+        elif task.status == TaskStatus.ALMOST_DONE:
+            almost_done += 1
+        elif task.status == TaskStatus.DONE:
+            done += 1
+
+    console.print(table)
+
+    categories = [
+        ("TODO", "red", not_done),
+        ("ALMOST DONE", "yellow", almost_done),
+        ("DONE", "green", done)
+    ]
+
+    for category in categories:
+        console.print("\n", end=" ")
+        tag = Text(" {v} ".format(v=category[0]), style="bold black on {color}".format(color=category[1]), end=" ")
+        console.print(tag, Text(str(category[2]), end="\n"))
 
 
 class SetStatusTaskCourseCommand(Command):
