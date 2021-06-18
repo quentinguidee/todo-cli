@@ -8,3 +8,4 @@ class Event:
     id: str
     start: Time
     end: Time
+    course_id: str

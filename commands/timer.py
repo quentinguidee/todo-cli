@@ -9,10 +9,12 @@ from utils.time import DeltaTime, Time
 
 
 class StartTimerCommand(Command):
+    args = {"course_id": "The course to study."}
+
     def execute(self, args):
         now = Time.now()
 
-        save.start_timer(now.timestamp)
+        save.start_timer(now.timestamp, args[0])
 
         console = Console()
         tag = Text(" TIMER STARTED ", style="bold black on green", end=" ")
@@ -21,11 +23,15 @@ class StartTimerCommand(Command):
 
 class StopTimerCommand(Command):
     def execute(self, args):
-        start_timer = Time(save.get_current_timer())
+        temp_timer = save.get_current_timer()
+        start = temp_timer.get("start")
+        course_id = temp_timer.get("course_id")
+
+        start_timer = Time(start)
         end_timer = Time.now()
         elapsed_time = DeltaTime.between(end_timer, start_timer)
 
-        save.add_current_study(end_timer.get_date(), start_timer, end_timer)
+        save.add_current_study(end_timer.get_date(), start_timer, end_timer, course_id)
         save.end_timer()
 
         console = Console()

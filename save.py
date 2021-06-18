@@ -10,6 +10,11 @@ def get_courses():
     return [Course(k, v.get("name")) for k, v in courses.items()]
 
 
+def get_course(course_id: str):
+    course = storage().get("courses").get(course_id).as_dict()
+    return Course(course_id, course.get("name"))
+
+
 def add_course(course: Course):
     return storage().get("courses").add(course.id, {"name": course.name})
 
@@ -39,27 +44,36 @@ def set_task_status(course_id: str, task_id: str, status: TaskStatus):
     return storage().get("courses").get(course_id).get("tasks").get(task_id).edit("status", status.value)
 
 
-def start_timer(time: float):
-    return storage().get("timer").edit("start", time)
+def start_timer(time: float, course_id: str):
+    return storage().get("timer").add("temp", {
+        "start": time,
+        "course_id": course_id,
+    })
 
 
 def end_timer():
-    return storage().get("timer").remove("start")
+    return storage().get("timer").remove("temp")
 
 
 def get_current_timer():
-    return storage().get("timer").get("start").as_dict()
+    return storage().get("timer").get("temp").as_dict()
 
 
-def add_current_study(date: str, start_timer: Time, end_timer: Time):
+def add_current_study(date: str, start_timer: Time, end_timer: Time, course_id: str):
     events = storage().get("timer").get("events").get(date).as_dict()
     return storage().get("timer").get("events").get(date).add(len(events) + 1, {
         "start": start_timer.timestamp,
         "end": end_timer.timestamp,
+        "course_id": course_id,
     })
 
 
 def get_events(date: Time):
     date = date.get_date()
     events = storage().get("timer").get("events").get(date).as_dict()
-    return [Event(k, Time(v.get("start")), Time(v.get("end"))) for k, v in events.items()]
+    return [Event(
+        k,
+        Time(v.get("start")),
+        Time(v.get("end")),
+        get_course(v.get("course_id")).name)
+        for k, v in events.items()]
