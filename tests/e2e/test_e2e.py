@@ -33,6 +33,7 @@ def get_current_save():
 
 class TestE2E(TestCase):
     @patch("storage.SAVE_FILENAME", TEMP_FILE_NAME)
+    @patch("commands.timer.OS", "None")
     @patch("sys.stdout", io.StringIO())
     def test_end_to_end(self):
         execute('todo course add Physics')

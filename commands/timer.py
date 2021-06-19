@@ -1,5 +1,5 @@
+import platform
 
-import datetime
 from typing import NoReturn
 
 from rich.console import Console
@@ -7,7 +7,11 @@ from rich.text import Text
 
 from commands.command import Command
 from utils.time import DeltaTime, Time
+from apple.calendar import save_event_to_calendar
 import save
+
+
+OS = platform.system()
 
 
 class StartTimerCommand(Command):
@@ -25,6 +29,7 @@ class StartTimerCommand(Command):
 
 class StopTimerCommand(Command):
     def execute(self, args) -> NoReturn:
+        # Save
         temp_timer = save.get_current_timer()
         start = temp_timer.get("start")
         course_id = temp_timer.get("course_id")
@@ -36,6 +41,13 @@ class StopTimerCommand(Command):
         save.add_current_study(end_timer.get_date(), start_timer, end_timer, course_id)
         save.end_timer()
 
+        # Create calendar event
+        if OS == "Darwin":
+            save_event_to_calendar(
+                name=save.get_course(course_id).name,
+                duration=elapsed_time.timestamp)
+
+        # Print
         console = Console()
         tag = Text(" TIMER STOPPED ", style="bold black on green", end=" ")
         message = Text("It is {} and you worked {}".format(
