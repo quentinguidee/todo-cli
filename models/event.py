@@ -9,3 +9,4 @@ class Event:
     start: Time
     end: Time
     course_id: str
+    task_id: str

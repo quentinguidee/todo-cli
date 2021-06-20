@@ -20,6 +20,7 @@ class TodayCommand(Command):
 
         table.add_column()
         table.add_column("Course")
+        table.add_column("Task")
         table.add_column("Duration")
         table.add_column("Start")
         table.add_column("End")
@@ -31,7 +32,8 @@ class TodayCommand(Command):
             total += delta_time
             table.add_row(
                 event.id,
-                event.course_id,
+                save.get_course(event.course_id).name,
+                save.get_task(event.course_id, event.task_id).name,
                 delta_time.get_hour_minutes_seconds(),
                 event.start.get_hour_and_minutes(),
                 event.end.get_hour_and_minutes()

@@ -65,7 +65,7 @@ class TestE2E(TestCase):
         data, expect = get_current_save(), get_expected_save("C")
         self.assertDictEqual(data, expect)
 
-        execute('todo timer start physics')
+        execute('todo timer start physics lab1')
         execute('todo timer stop')
 
         data = get_current_save()
@@ -87,7 +87,7 @@ class TestE2E(TestCase):
         self.assertIsInstance(end, float)
         self.assertEqual(course_id, "physics")
 
-        execute('todo timer start english')
+        execute('todo timer start english session1')
         execute('todo timer stop')
 
         data = get_current_save()
