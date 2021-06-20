@@ -1,13 +1,14 @@
-from datetime import date
 import json
 import os
 import sys
 import io
 
+from datetime import date
 from shlex import split
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, Mock, patch
 
+from commands.timer import StopTimerCommand
 from main import exec
 
 TEMP_FILE_NAME = "save-temp.json"
@@ -32,6 +33,7 @@ def get_current_save():
 
 
 class TestE2E(TestCase):
+    @patch.object(StopTimerCommand, "ask_task_status", new=Mock())
     @patch("storage.SAVE_FILENAME", TEMP_FILE_NAME)
     @patch("commands.timer.OS", "None")
     @patch("sys.stdout", io.StringIO())
